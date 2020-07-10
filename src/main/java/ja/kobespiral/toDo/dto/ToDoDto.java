@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class ToDoDto {
+    private Long tid;
     private String uid;
     private String title;
     private String description;
@@ -21,6 +22,7 @@ public class ToDoDto {
      */
     public static ToDoDto build(ToDo todo) {
         ToDoDto dto = new ToDoDto();
+        dto.tid = todo.getId();
         dto.uid = todo.getUid();
         dto.title = todo.getTitle();
         dto.description = todo.getDescription();
