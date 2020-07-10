@@ -27,6 +27,18 @@ public class ToDoController {
     @Autowired
     ToDoService ts;
 
+ // 全てのtodoを取得する
+    @GetMapping("/todolist")
+    public ModelAndView allToDoList() {
+        ModelAndView mav = new ModelAndView();
+        List<ToDoDto> todoList = ts.getAllToDo();
+        mav.addObject("title", "toDoリスト | ToDo App");
+        mav.addObject("tdlist", todoList);
+        mav.addObject("mainContents", "/components/allToDo");
+        mav.setViewName("./mainLayout.html");
+        return mav;
+    }
+
     // ユーザのtodoを取得する
     @GetMapping("/user/{uid}/todolist")
     public ModelAndView myToDoList(@PathVariable String uid) {
@@ -39,17 +51,7 @@ public class ToDoController {
         return mav;
     }
 
-    // 全てのtodoを取得する
-    @GetMapping("/todolist")
-    public ModelAndView allToDoList(@PathVariable String uid) {
-        ModelAndView mav = new ModelAndView();
-        List<ToDoDto> todoList = ts.getAllToDo();
-        mav.addObject("title", "toDoリスト | ToDo App");
-        mav.addObject("tdlist", todoList);
-        mav.addObject("mainContents", "/components/allToDo");
-        mav.setViewName("./mainLayout.html");
-        return mav;
-    }
+
 
     // todo追加用フォームを表示する
     @GetMapping("/user/{uid}/addToDo")

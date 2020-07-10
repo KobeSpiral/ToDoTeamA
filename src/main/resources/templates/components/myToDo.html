@@ -12,8 +12,8 @@
     </thead>
     <tbody>
     <tr th:each="t: ${tdlist}">
-        <!-- <td th:if="t.isOpen" th:onclick="|post(${t.tid})|"><i class="far fa-square"></i></td> -->
-        <td th:unless="${t.isOpen}" th:onclick="|post(${t.tid})|"><i class="far fa-check-square"></i></td>
+        <td th:if="${t.Open}" th:onclick="|post(${t.tid})|"><i class="far fa-square"></i></td>
+        <td th:unless="${t.Open}" th:onclick="|post(${t.tid})|"><i class="far fa-check-square"></i></td>
         <td> [[${t.title}]]</td>
         <td> [[${t.description}]]</td>
         <td th:text="${#dates.format(t.createdAt, 'yyyy/MM/dd')}"></td>

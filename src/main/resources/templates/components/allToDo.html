@@ -1,13 +1,37 @@
 <!DOCTYPE html>
 <h1>全ToDoリスト</h1>
 <table>
-    <tr th:each="t: ${tdlist}">
-        <td> [[${t.isOpen}]]</td><!--ifがいる-->
-        <td> [[${t.uid}]]</td>
-        <td> [[${t.title}]]</td>
-        <td> [[${t.description}]]</td>
-        <td> [[${t.createdAt}]]</td>
-        <td> [[${t.limitAt}]]</td>
-        <td> [[${t.doneAt}]]</td><!--nullかも if分つける-->
-    </tr>
+    <thead>
+        <tr>
+            <th>open</th>
+            <th>uid</th>
+            <th>title</th>
+            <th>description</th>
+            <th>createdAt</th>
+            <th>limitAt</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="t: ${tdlist}">
+            <td th:if="${t.Open}" th:onclick="|post(${t.tid})|"><i class="far fa-square"></i></td>
+            <td th:unless="${t.Open}" th:onclick="|post(${t.tid})|"><i class="far fa-check-square"></i></td>
+            <td> [[${t.uid}]]</td>
+            <td> [[${t.title}]]</td>
+            <td> [[${t.description}]]</td>
+            <td th:text="${#dates.format(t.createdAt, 'yyyy/MM/dd')}"></td>
+            <td th:text="${#dates.format(t.limitAt, 'yyyy/MM/dd')}"></td>
+            <!-- <td> [[${t.doneAt}]]</td>nullかも if分つける -->
+        </tr>
+    </tbody>
+    <script>
+        function post(ttid){
+            xhr = new XMLHttpRequest();
+            xhr.open('POST', '/todo/update', true);
+            xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+            // フォームに入力した値をリクエストとして設定
+            var request = "tid="+ttid;
+            console.log(request);
+            xhr.send(request);
+        }
+    </script>
 </table>
