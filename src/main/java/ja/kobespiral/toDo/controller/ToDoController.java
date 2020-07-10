@@ -2,6 +2,8 @@ package ja.kobespiral.toDo.controller;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
@@ -9,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import ja.kobespiral.toDo.dto.ToDoDto;
@@ -55,6 +59,12 @@ public class ToDoController {
         mav.addObject("mainContents", "/components/registerToDo");
         mav.setViewName("./mainLayout.html");
         return mav;
+    }
+    @PostMapping("/todo/update")
+    @ResponseBody
+    public String update(@RequestParam("tid")Long tid){
+        ts.updateToDo(tid);
+        return "aa";
     }
 
     @PostMapping("/user/{uid}/addToDo")

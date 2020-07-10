@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ja.kobespiral.toDo.dto.ToDoDto;
 import ja.kobespiral.toDo.entity.ToDo;
+import ja.kobespiral.toDo.exception.UserCheckException;
 import ja.kobespiral.toDo.repository.ToDoRepository;
 
 @Service
@@ -32,7 +33,11 @@ public class ToDoService {
         return null;
     }
 
-    public ToDoDto updateToDo(ToDo todo){
-        return null;
+    public String updateToDo(Long tid){
+        ToDo t = todos.findById(tid).orElseThrow(()-> new UserCheckException(404, "muri"));
+        t.setOpen(!t.isOpen());
+        todos.save(t);
+        return "ok";
     }
+
 }
