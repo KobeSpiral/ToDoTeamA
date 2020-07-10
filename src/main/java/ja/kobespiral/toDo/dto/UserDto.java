@@ -7,7 +7,7 @@ import lombok.Data;
 
 @Data
 public class UserDto {
-    private Long uid;
+    private String uid;
     private String name;
     private Date createdAt;
 
@@ -15,7 +15,7 @@ public class UserDto {
      * ユーザーEntityからDTOを作成
      * 
      */
-    public static UserDto build(User user){
+    public static UserDto build(User user) {
         UserDto dto = new UserDto();
         dto.uid = user.getUid();
         dto.name = user.getName();
