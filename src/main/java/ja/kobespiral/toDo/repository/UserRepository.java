@@ -1,5 +1,7 @@
 package ja.kobespiral.toDo.repository;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +16,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
      * @param name 検索する名前・LIKEで検索"%板谷%"
      * @return
      */
-    public Iterable<User> findUserByNameLike(String name);
+    public List<User> findUserByNameLike(String name);
 
     // uidで検索 一意なはず
 

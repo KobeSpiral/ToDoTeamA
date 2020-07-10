@@ -30,8 +30,9 @@ public class CreateToDoForm {
         Date d = null;
         try {
             d = df.parse(limitAt);
-        } catch (ParseException e) {}
-        ToDo todo = new ToDo(null, uid, title, description, true, null, d,null,null);
+        } catch (ParseException e) {
+        }
+        ToDo todo = new ToDo(null, uid, title, description, true, null, d, null, null);
         return todo;
     }
 }
