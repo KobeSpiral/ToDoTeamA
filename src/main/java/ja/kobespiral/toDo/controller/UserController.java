@@ -22,25 +22,27 @@ import ja.kobespiral.toDo.service.UserService;
 public class UserController {
     @Autowired
     UserService us;
-    
+
     @GetMapping("/")
-    public ModelAndView home(){
+    public ModelAndView home() {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "ToDo App");
         model.addObject("mainContents", "/components/homeView");
         model.setViewName("./mainLayout.html");
         return model;
     }
+
     @GetMapping("/addUser")
-    public ModelAndView addUser(){
+    public ModelAndView addUser() {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "ユーザー追加 | ToDo App");
         model.addObject("mainContents", "/components/inputForm");
         model.setViewName("./mainLayout.html");
         return model;
     }
+
     @GetMapping("/users")
-    public ModelAndView showAllUsers(){
+    public ModelAndView showAllUsers() {
         ModelAndView model = new ModelAndView();
         model.addObject("title", "ユーザー一覧 | ToDo App");
         model.addObject("mainContents", "/components/allUserList");
@@ -51,7 +53,7 @@ public class UserController {
     }
 
     @PostMapping("/users")
-    public ModelAndView addUser(@ModelAttribute("form") @Validated UserForm form,ModelAndView model){
+    public ModelAndView addUser(@ModelAttribute("form") @Validated UserForm form, ModelAndView model) {
         User u = us.addUser(form.toEntity());
         model.addObject("uid", u.getUid());
         model.addObject("name", u.getName());
@@ -61,24 +63,23 @@ public class UserController {
         model.setViewName("./mainLayout.html");
         return model;
     }
-    /*@PostMapping("/users")
-    public String addUser(@ModelAttribute("form") @Validated UserForm form,Model model) {
-        
-        User u = us.addUser(form.toEntity());
-        model.addAttribute("uid", u.getUid());
-        model.addAttribute("name", u.getName());
-        model.addAttribute("createdAt", u.getCreatedAt());
-        return "success";
-    }*/
+    /*
+     * @PostMapping("/users") public String
+     * addUser(@ModelAttribute("form") @Validated UserForm form,Model model) {
+     * 
+     * User u = us.addUser(form.toEntity()); model.addAttribute("uid", u.getUid());
+     * model.addAttribute("name", u.getName()); model.addAttribute("createdAt",
+     * u.getCreatedAt()); return "success"; }
+     */
 
-    /*@PostMapping("/search")
-    public ModelAndView searchUser(@ModelAttribute("form") @Validated SearchForm form,ModelAndView model){
-        model.addObject("title", "ユーザー検索 | ToDo App");
-        String searchPath="/components/search/"+form.getUid().toString();
-        model.addObject("mainContents", searchPath);
-        model.setViewName("./mainLayout.html");
-        return showUser(uid, model);
-    }*/
+    /*
+     * @PostMapping("/search") public ModelAndView
+     * searchUser(@ModelAttribute("form") @Validated SearchForm form,ModelAndView
+     * model){ model.addObject("title", "ユーザー検索 | ToDo App"); String
+     * searchPath="/components/search/"+form.getUid().toString();
+     * model.addObject("mainContents", searchPath);
+     * model.setViewName("./mainLayout.html"); return showUser(uid, model); }
+     */
 
     @GetMapping("/users/{uid}")
     public String showUser(@PathVariable Long uid, Model model) {
@@ -87,11 +88,10 @@ public class UserController {
         return "userinfo";
     }
 
-    /*@GetMapping("/users")
-    public String showAllUsers(Model model) {
-        List<UserDto> userList = us.getAllUsers();
-        model.addAttribute("ulist", userList);
-        return "alluserlist";
-    }*/
+    /*
+     * @GetMapping("/users") public String showAllUsers(Model model) { List<UserDto>
+     * userList = us.getAllUsers(); model.addAttribute("ulist", userList); return
+     * "alluserlist"; }
+     */
 
 }
