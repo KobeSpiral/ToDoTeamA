@@ -18,7 +18,7 @@ public class UserService {
 
     public User addUser(User user) {
         String uid = user.getUid();
-        if (uid != null && users.findUserByUid(uid) == null) {
+        if (uid != null && users.findUserByUid(uid) != null) {
             throw new UserCheckException(UserCheckException.USER_ALREADY_EXISTS, "User #" + uid + " already exists");
         } else {
             return users.save(user);
