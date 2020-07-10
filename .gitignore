@@ -30,5 +30,5 @@ out/
 
 ### VS Code ###
 .vscode/
-bin/
+/bin/*
 *.class
