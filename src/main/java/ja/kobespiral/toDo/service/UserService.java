@@ -25,9 +25,13 @@ public class UserService {
         }
     }
 
-    public UserDto getUser(Long uid) {
-        User p = users.findById(uid)
-                .orElseThrow(() -> new UserCheckException(UserCheckException.NO_SUCH_USER, "No such person #" + uid));
+    public UserDto getUser(String uid) {
+        User p = users.findUserByUid(uid);
+
+        // とりあえずnullチェック
+        if (p == null) {
+            throw new UserCheckException(UserCheckException.NO_SUCH_USER, "No such person #" + uid);
+        }
 
         return UserDto.build(p);
     }
