@@ -14,7 +14,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ja.kobespiral.toDo.dto.UserDto;
 import ja.kobespiral.toDo.entity.User;
-import ja.kobespiral.toDo.form.SearchForm;
 import ja.kobespiral.toDo.form.UserForm;
 import ja.kobespiral.toDo.service.UserService;
 
