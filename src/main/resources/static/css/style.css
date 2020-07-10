@@ -1,0 +1,126 @@
+*{
+    box-sizing: border-box;
+}
+p{
+    margin:0;
+}
+a:link, a:visited, a:hover, a:active {
+    color:black;
+    text-decoration: none;
+}
+body{
+    margin:0;
+    position: relative;
+}
+
+#mainFrame{
+    position: relative;
+    display:flex;
+    width:100%;
+}
+
+#navigation{
+    width:230px;
+    box-shadow: 6px 0 4px -4px gray;
+}
+
+#navigation h4 {
+    color:rgba(24, 39, 57, 0.94);
+    font-size: 1.5em;
+    margin: 1.5em;
+}
+.fold1{
+    pointer-events: none;
+}
+#fold2{
+    display: none;
+}
+.navItem{
+    align-items: center;
+    display: flex;
+    font-weight: 500;
+    height:2.5em;
+    text-decoration: none;
+    padding-left: 20px;
+}
+#mainContents{
+    width:100%;
+    padding:0 5vw;
+}
+#pad{
+    padding-top: 25vh;
+}
+@media screen and (max-width:480px){
+    #mainFrame{
+        flex-direction: column;
+    }
+    #mainContents{
+        margin-top:3.5em;
+    }
+    #navigation{
+        position: absolute;
+        z-index: 99;
+        background-color: white;
+        width:calc(100% - 11px);
+        margin: 5px;
+        box-shadow: 2px 0 4px gray;
+    }
+    #navigation h4{
+        margin:0;
+        width: 100%;
+    }
+    .fold1{
+        display:block;
+        pointer-events: all;
+        width:100%;
+    }
+    .fold3{
+        height: 0;
+		padding: 0 8px;
+		transition: .2s;
+		overflow: hidden;
+    }
+    input:checked + .fold3{
+		height: auto;
+		padding: 8px;
+	}
+}
+header,footer{
+    display:table;
+    height:9vh;
+    width:100%;
+}
+header{
+    color: #FFFFFF;
+    background-color: #0d283a;
+    font-size: 1.5em;
+    padding-left: 2vw;
+}
+footer{
+    display: table;
+    background-color: rgba(25, 59, 103, 0.05);
+    text-align: center;
+    vertical-align: middle;
+}
+header *, footer *{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inputForm{
+    margin:0 auto;
+    text-align: center;
+}
+.inputForm *{
+    text-align: center;
+}
+.textInput{
+    margin:10px 0;
+}
+
+.textInput input{
+    border:solid 1px #ccc;
+    border-radius: 3px;
+    height: 2em;
+}
+
