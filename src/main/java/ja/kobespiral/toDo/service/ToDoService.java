@@ -16,25 +16,32 @@ public class ToDoService {
     @Autowired
     ToDoRepository todos;
 
-    public ToDoDto addToDo(ToDo todo){
+    // todoを1つ追加する
+    public ToDoDto addToDo(ToDo todo) {
         return ToDoDto.build(todos.save(todo));
     }
-    
-    public List<ToDoDto> getToDo(String uid){
+
+    // uidからtodoを取得する
+    public List<ToDoDto> getToDo(String uid) {
         ArrayList<ToDoDto> list = new ArrayList<ToDoDto>();
-        for(ToDo d: todos.findAll()){
+        for (ToDo d : todos.findTodoByUid(uid)) {
             list.add(ToDoDto.build(d));
         }
         return list;
     }
-        
 
-    public List<ToDoDto>  getAllToDo(){
-        return null;
+    // 全てのtodoを取得する
+    public List<ToDoDto> getAllToDo() {
+        ArrayList<ToDoDto> list = new ArrayList<ToDoDto>();
+        for (ToDo d : todos.findAll()) {
+            list.add(ToDoDto.build(d));
+        }
+        return list;
     }
 
-    public String updateToDo(Long tid){
-        ToDo t = todos.findById(tid).orElseThrow(()-> new UserCheckException(404, "muri"));
+    // tidに対応するtodoの。isopenを変更する
+    public String updateToDo(Long tid) {
+        ToDo t = todos.findById(tid).orElseThrow(() -> new UserCheckException(404, "muri"));
         t.setOpen(!t.isOpen());
         todos.save(t);
         return "ok";
