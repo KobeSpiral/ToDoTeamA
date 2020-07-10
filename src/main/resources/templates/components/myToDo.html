@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<h1>ToDoリスト</h1><!--ユーザー名-->
+<table>
+    <tr th:each="t: ${tdlist}">
+        <td> [[${t.isOpen}]]</td><!--ifがいる-->
+        <td> [[${t.title}]]</td>
+        <td> [[${t.description}]]</td>
+        <td> [[${t.createdAt}]]</td>
+        <td> [[${t.limitAt}]]</td>
+        <td> [[${t.doneAt}]]</td><!--nullかも if分つける-->
+    </tr>
+</table>

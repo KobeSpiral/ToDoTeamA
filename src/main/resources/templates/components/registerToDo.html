@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<h1 text="user.name">ユーザー名</h1><!--あとでやる-->
+<div class="inputForm" id="pad">
+    <form th:action="${registerPath}" method="post">
+        <div class="textInput">
+            <p>ToDo名</p>
+            <input type="text" name="title" placeholder="(必須)">
+        </div>
+        <div class="textInput">
+            <p>詳細</p>
+            <input type="text" name="descreption" placeholder="(任意)">
+        </div>
+        <div class="textInput">
+            <p>締め切り</p>
+            <input type="date" name="limitAt" placeholder="">
+        </div>
+        <input type="submit" value="新規作成" name="submit">
+    </form>
+</div>
