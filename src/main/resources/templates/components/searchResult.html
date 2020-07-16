@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<h1>検索結果</h1>
+<table>
+    <tr th:each="p: ${ulist}">
+        <td> [[${p.uid}]] </td>
+        <td> [[${p.name}]] </td>
+        <td> [[${p.createdAt}]] </td>
+    </tr>
+</table>

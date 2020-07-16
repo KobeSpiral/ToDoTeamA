@@ -1,5 +1,6 @@
 package ja.kobespiral.toDo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ja.kobespiral.toDo.dto.UserDto;
 import ja.kobespiral.toDo.entity.User;
+import ja.kobespiral.toDo.form.SearchForm;
 import ja.kobespiral.toDo.form.UserForm;
+import ja.kobespiral.toDo.repository.UserRepository;
 import ja.kobespiral.toDo.service.UserService;
 
 @Controller
@@ -69,15 +72,35 @@ public class UserController {
         model.addAttribute("createdAt", u.getCreatedAt());
         return "success";
     }*/
-
-    /*@PostMapping("/search")
-    public ModelAndView searchUser(@ModelAttribute("form") @Validated SearchForm form,ModelAndView mav){
+    @GetMapping("/search")
+    public ModelAndView searchUser(){
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("mainContents", "/components/search");
         mav.addObject("title", "ユーザー検索 | ToDo App");
-        String searchPath="/components/search/"+form.getUid().toString();
-        mav.addObject("mainContents", searchPath);
         mav.setViewName("./mainLayout.html");
-        return showUser(uid, mav);
-    }*/
+        return mav;
+    }
+
+    @PostMapping("/search")
+    public ModelAndView searchUserResult(@ModelAttribute("form") @Validated SearchForm form){
+        ModelAndView mav = new ModelAndView();
+        String uid,name;
+        List<UserDto> ulist = new ArrayList<>();
+        if((name = form.getName()) != null){
+            ulist.addAll(us.getUsersByNameLike(name));
+        }
+        if((uid = form.getUid()) != null){
+            UserDto u;
+            if(!ulist.contains(u = us.getUser(uid))){
+                ulist.add(0, u);
+            }
+        }
+        mav.addObject("ulist", ulist);
+        mav.addObject("mainContents", "/components/searchResult");
+        mav.addObject("title", "検索結果 | ToDo App");
+        mav.setViewName("./mainLayout.html");
+        return mav;
+    }
 
     @GetMapping("/users/{uid}")
     public String showUser(@PathVariable String uid, Model model) {

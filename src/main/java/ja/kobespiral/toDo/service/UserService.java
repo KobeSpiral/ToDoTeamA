@@ -24,7 +24,13 @@ public class UserService {
             return users.save(user);
         }
     }
-
+    public List<UserDto> getUsersByNameLike(String name){
+        ArrayList<UserDto> list = new ArrayList<>();
+        for(User p : users.findUserByNameLike(name)){
+            list.add(UserDto.build(p));
+        }
+        return list;
+    }
     public UserDto getUser(String uid) {
         User p = users.findUserByUid(uid);
 
