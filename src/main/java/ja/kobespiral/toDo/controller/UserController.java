@@ -91,6 +91,7 @@ public class UserController {
         }
         if((uid = form.getUid()) != null){
             UserDto u;
+            //ここの処理違うので(値が一緒でも違うインスタンスなのでたぶんダメ)書き直す
             if(!ulist.contains(u = us.getUser(uid))){
                 ulist.add(0, u);
             }
